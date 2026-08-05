@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoginLeft = () => {
   return (
-    <div className='hidden lg:flex lg:w-2/5 bg-linear-to-tr from-purple-900 to-pink-300 flex-col justify-between p-12 shrink-0 select-none'>
+    <div className='hidden lg:flex lg:w-2/5 bg-purple-700  flex-col justify-between p-12 shrink-0 select-none'>
         <div className="flex items-center gap-3">
             <img src="/favicon.svg" alt="logo" className="size-9.5" />
             <span className="text-4xl font-medium text-white">Builder AI</span>

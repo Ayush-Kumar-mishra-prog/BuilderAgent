@@ -69,7 +69,7 @@ try {
           </div>
          
         </div>
-        <button className="w-full py-2.5  bg-linear-to-br from-purple-700 to-pink-200 text-white font-semibold hover:scale-102 disabled:opacity-40 flex items-center justify-center cursor-pointer mt-2 rounded-lg transition-all" type="submit" disabled={loading}> {loading && <Loader2Icon className='animate-spin h-3.5 w-3.5 mr-2' />}
+        <button className="w-full py-2.5  bg-purple-700 text-white font-semibold hover:scale-102 disabled:opacity-40 flex items-center justify-center cursor-pointer mt-2 rounded-lg transition-all" type="submit" disabled={loading}> {loading && <Loader2Icon className='animate-spin h-3.5 w-3.5 mr-2' />}
         {isLogin ?"Sign In":"Sign Up"}
          </button>
     </form>
