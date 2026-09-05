@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -9,6 +9,7 @@ import { userData } from "../data/UserData";
 import api from "../api/api";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
+import debounce from 'lodash.debounce'
 
 const AppContext = createContext(undefined);
 
@@ -24,6 +25,7 @@ export function AppContextProvider({ children }) {
   const [generatingProject, setGeneratingProject] = useState(false);
   const [activeFile, setActiveFile] = useState("/App.js");
   const [showCode, setShowCode] = useState(false);
+
   useEffect(() => {
     const checkSession = async () => {
       try {
@@ -174,6 +176,46 @@ export function AppContextProvider({ children }) {
     [user],
   );
 
+  const handleChat = useCallback(async(prompt)=>{
+    if(!activeProject || !user) return;
+    setChatLoading(true)
+    try {
+      const {data} = await api.post(`/api/project/${activeProject._id}/chat`,{prompt})
+      setActiveProject(data)
+      if(data.errors && data.errors.length > 0){
+        toast.error(`${data.errors.length} revision patch(es) failed`)
+      }else{
+        toast.success(`Updated to version ${data.version}`)
+      }
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setChatLoading(false)
+    }
+  },[activeProject,user])
+
+  const debounceSave = React.useMemo(
+    ()=>debounce(async (files,id)=>{
+       try {
+        await api.put(`/api/project/${id}/files`,{files})
+       } catch (error) {
+        console.error(error)
+        toast.error("Failed to save code")
+       }
+    },1000),[]
+  )
+
+  useEffect(()=>{
+    return ()=>{
+      debounceSave.flush()
+    }
+  },[debounceSave])
+
+  const updateProjectFiles = useCallback(async(files)=>{
+    if(!activeProject || !user) return;
+    debounceSave(files,activeProject._id)
+  },[activeProject,user,debounceSave])
+
   return (
     <AppContext.Provider
       value={{
@@ -195,7 +237,9 @@ export function AppContextProvider({ children }) {
         loadingProjects,
         handleGenerate,
         handleDelete,
-        logout
+        logout,
+        handleChat,
+        updateProjectFiles
       }}
     >
       {children}

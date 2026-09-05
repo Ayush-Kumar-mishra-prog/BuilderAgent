@@ -11,14 +11,14 @@ const HomePage = () => {
   useEffect(()=>{loadProjects()},[loadProjects])
   const navigate = useNavigate()
   return (
-    <div className='h-screen overflow-y-scroll text-purple-950 font-sans bg-linear-to-b from-white to-purple-900'>
+    <div className='h-screen overflow-y-scroll text-purple-950 font-sans bg-[url("/bg.jpg")] bg-cover bg-center '>
       <nav className="sticky top-0 z-10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2">
           <img src="/favicon.svg" alt="logo" className="size-6" />
-          <span className="text-xl  font-semibold tracking-tight">Builder-Ai</span>
+          <span className="text-xl  font-semibold tracking-tight text-amber-500">Builder-Ai</span>
         </div>
         <div className="flex items-center gap-4 text-sm font-medium text-zinc-800">
-          <span className="">{user.name}</span>
+          <span className="text-white">{user.name}</span>
           <button onClick={logout} className="py-1.5 px-3 border border-purple-500 text-white hover:bg-purple-700 text-xs rounded-md cursor-pointer bg-purple-700">Sign Out</button>
         </div>
       </nav>
@@ -27,9 +27,9 @@ const HomePage = () => {
         <div className="w-full max-w-2xl flex flex-col items-center">
           <div className="flex items-center gap-2 p-1.5 pr-3 bg-white/10 backdrop-blur-md rounded-full border-white/20 text-[13px] text-zinc-950/90">
             <span className="px-3 py-1 text-[11px] bg-purple-500 rounded-full font-medium tracking-wider text-white">PROMO</span>
-            <span className="">Create your first project for free</span>
+            <span className="text-white">Create your first project for free</span>
           </div>
-          <h1 className="text-center text-4xl md:text-6xl font-medium mt-4 max-w-2xl text-purple-900">Let's build your app together</h1>
+          <h1 className="text-center text-4xl md:text-6xl font-medium mt-4 max-w-2xl text-amber-400">Let's build your app together</h1>
           <p className="text-center mt-4 text-sm md:text-base max-w-xl text-white leading-relaxed">Describe your idea and watch AI design,structure and launch your website instantly.No coding required</p>
           <div className="w-full mt-6">
             <PromptInput 

@@ -5,6 +5,7 @@ import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import Builder from "./pages/Builder";
 import PreviewPage from "./pages/PreviewPage";
+import PublishPage from "./pages/PublishPage";
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
         <Route path="/builder/:id" element={<Builder />} />
         <Route path="/preview/:id" element={<PreviewPage />} />
       </Route>
+
+      <Route path='publish/:id' element={<PublishPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
